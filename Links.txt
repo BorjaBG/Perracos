@@ -1,1 +1,5 @@
 https://medium.com/@balramchavan/using-openstreetmap-inside-angular-v6-3d42cbf03e57
+
+https://openlayers.org/en/latest/doc/tutorials/bundle.html
+
+https://tecnotaxia.com/blog/extensiones-para-visual-studio-code/
