@@ -21,7 +21,7 @@ export class HomePage {
     this.map = leaflet.map("map").fitWorld();
     leaflet.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=8a579859eda74a3bab08b97aa36c56ad', {
       attributions: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18
+      maxZoom: 50
     }).addTo(this.map);
     this.map.locate({
       setView: true,
