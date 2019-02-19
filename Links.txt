@@ -9,3 +9,5 @@ https://openlayers.org/en/latest/examples/localized-openstreetmap.html
 http://thunderforest.com/
 
 https://leafletjs.com/index.html
+
+https://forum.ionicframework.com/t/how-to-solve-the-app-not-installed-error-on-android-devices/139401/4
