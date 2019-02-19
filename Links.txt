@@ -7,3 +7,5 @@ https://tecnotaxia.com/blog/extensiones-para-visual-studio-code/
 https://openlayers.org/en/latest/examples/localized-openstreetmap.html
 
 http://thunderforest.com/
+
+https://leafletjs.com/index.html
