@@ -22,6 +22,7 @@ export class HomePage {
   loadmap() {
   
     this.map = leaflet.map("map").fitWorld( );
+
     leaflet.control.scale().addTo(this.map);
 
     leaflet.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=8a579859eda74a3bab08b97aa36c56ad', {
@@ -29,10 +30,27 @@ export class HomePage {
       maxZoom: 18
     }).addTo(this.map);
 
-    leaflet.easyButton( '<span class="star">&starf;</span>', function(){
-      alert('you just clicked the html entity \&starf;');
+    leaflet.easyButton( '<ion-icon class="star" name="flag"></ion-icon>', function(){
+
     }).addTo(this.map);
 
+    leaflet.easyButton( '<ion-icon class="star" name="locate"></ion-icon>', function(control, map){
+     map.locate({
+      setView: true,
+      maxZoom: 50
+    }).on('locationfound', (e) => {
+      let markerGroup = leaflet.featureGroup();
+      let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
+        map.setView([e.latitude,e.longitude], 13);
+      })
+      }).on('locationerror', (err) => {
+        alert(err.message);
+    })
+
+
+
+
+    }).addTo(this.map);
 
     this.map.locate({
       setView: true,
@@ -40,11 +58,10 @@ export class HomePage {
     }).on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
-       alert('Marker clicked');
-        //map.flyTo({center: [e.latitude, e.longitude]});
-       // map.easeTo({center: [e.latitude, e.longitude]});
+
       })
       markerGroup.addLayer(marker);
+      marker.bindPopup("<b>Posicion actual</b>").openPopup();
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
         alert(err.message);
