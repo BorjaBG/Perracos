@@ -30,11 +30,28 @@ export class HomePage {
       maxZoom: 18
     }).addTo(this.map);
 
-    leaflet.easyButton( '<ion-icon class="star" name="flag"></ion-icon>', function(){
-
-    }).addTo(this.map);
+    var toggle = leaflet.easyButton({
+      states: [{
+          icon: '<ion-icon class="star" name="flag"></ion-icon>',
+          stateName: 'check-mark',
+          onClick: function(btn,map) {
+              btn.button.style.backgroundColor = 'LightBlue';
+              btn.state('x-mark');
+          }
+      }, {
+          icon: '<ion-icon class="star" name="flag"></ion-icon>',
+          stateName: 'x-mark',
+          onClick: function(btn,map) {
+              btn.button.style.backgroundColor = 'white';
+              btn.state('check-mark');
+          }
+      }]
+  });
+  toggle.button.style.transitionDuration = '.3s';
+  toggle.addTo(this.map);
 
     leaflet.easyButton( '<ion-icon class="star" name="locate"></ion-icon>', function(control, map){
+
      map.locate({
       setView: true,
       maxZoom: 50
@@ -46,11 +63,8 @@ export class HomePage {
       }).on('locationerror', (err) => {
         alert(err.message);
     })
-
-
-
-
     }).addTo(this.map);
+
 
     this.map.locate({
       setView: true,
