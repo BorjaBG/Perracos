@@ -128,15 +128,14 @@ async saveTodo() {
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
 
-
- 
-
     leaflet.easyButton( '<ion-icon class="star" name="locate"></ion-icon>', function(control, map){
 
      map.locate({
       setView: true,
       maxZoom: 50
-    }).on('locationfound', (e) => {
+    })
+    }).addTo(this.map);
+    /*.on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
         map.setView([e.latitude,e.longitude], 13);
@@ -144,9 +143,7 @@ async saveTodo() {
       })
       }).on('locationerror', (err) => {
         alert(err.message);
-    })
-    }).addTo(this.map);
-
+    })*/
 
     this.map.locate({
       setView: true,
