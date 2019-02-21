@@ -5,6 +5,8 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 
 import leaflet from 'leaflet';
+import * as L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 declare var ol: any;
 declare var map: any;
@@ -147,18 +149,24 @@ async saveTodo() {
       }).on('locationerror', (err) => {
         alert(err.message);
     })*/
+    /*var lc = L.control.locate({
+      position: 'topright',
+      strings: {
+          title: "Show me where I am, yo!"
+      }}).addTo(this.map);*/
+      L.control.locate().addTo(this.map);
+ 
 
     this.map.locate({
       setView: true,
       maxZoom: 50
     }).on('locationfound', (e) => {
-      let markerGroup = leaflet.featureGroup();
-      //alert(e.latitude+' '+ e.longitude);
+     /* let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
       })
       markerGroup.addLayer(marker);
       marker.bindPopup("<b>Posicion actual</b>").openPopup();
-      this.map.addLayer(markerGroup);
+      this.map.addLayer(markerGroup);*/
       }).on('locationerror', (err) => {
         alert(err.message);
     })
