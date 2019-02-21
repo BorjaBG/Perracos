@@ -12,4 +12,13 @@ https://leafletjs.com/index.html
 
 https://forum.ionicframework.com/t/how-to-solve-the-app-not-installed-error-on-android-devices/139401/4
 
+<<<<<<< HEAD
 https://leafletjs.com/plugins.html
+=======
+https://leafletjs.com/plugins.html
+
+
+
+Install:
+    -
+>>>>>>> c3186cf85d92a33d423850e2d5c66fd1b010af7c
