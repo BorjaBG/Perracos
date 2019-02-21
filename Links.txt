@@ -13,3 +13,14 @@ https://leafletjs.com/index.html
 https://forum.ionicframework.com/t/how-to-solve-the-app-not-installed-error-on-android-devices/139401/4
 
 https://leafletjs.com/plugins.html
+https://leafletjs.com/plugins.html
+
+android:
+ ionic cordova build android --prod
+=======
+
+
+Suvir fotos a firebase
+https://ryctabo.wordpress.com/2018/03/05/how-to-upload-files-to-firebase-from-angular/
+Framework
+https://ionicframework.com/docs/api/textarea

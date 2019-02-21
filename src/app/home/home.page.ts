@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Todo, TodoService } from '../services/todo.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 import leaflet from 'leaflet';
 
@@ -35,7 +36,7 @@ export class HomePage  implements OnInit{
   };
  
   todoId = null;
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController, private alertCtrl: AlertController) { }
  
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
@@ -85,14 +86,6 @@ async saveTodo() {
     let flag : boolean = true;
     this.map = new leaflet.map("map").fitWorld( );
 
-     //this.map.marker([43.27683038906162, -2.898330688476563], { title: "My marker" }).addTo(map);
- 
-    /* var marker = leaflet.marker([43.27683038906162,-2.898330688476563])
-     .bindPopup("My marker")
-     .addTo(this.map);*/
-
-
-
     leaflet.control.scale().addTo(this.map);
 
     leaflet.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=8a579859eda74a3bab08b97aa36c56ad', {
@@ -110,8 +103,12 @@ async saveTodo() {
               flag = true;
               map.on("click", function(e){
                 if (flag == true) {
-                  new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-         
+
+                  //new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+                  new leaflet.marker([e.latlng.lat, e.latlng.lng]).addTo(map).on('click', () => {
+                  
+                  
+                  })
               
                 }
              });
@@ -139,7 +136,9 @@ async saveTodo() {
      map.locate({
       setView: true,
       maxZoom: 50
-    }).on('locationfound', (e) => {
+    })
+    }).addTo(this.map);
+    /*.on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
         map.setView([e.latitude,e.longitude], 13);
@@ -147,9 +146,7 @@ async saveTodo() {
       })
       }).on('locationerror', (err) => {
         alert(err.message);
-    })
-    }).addTo(this.map);
-
+    })*/
 
     this.map.locate({
       setView: true,
@@ -158,7 +155,6 @@ async saveTodo() {
       let markerGroup = leaflet.featureGroup();
       //alert(e.latitude+' '+ e.longitude);
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
-
       })
       markerGroup.addLayer(marker);
       marker.bindPopup("<b>Posicion actual</b>").openPopup();
@@ -167,4 +163,5 @@ async saveTodo() {
         alert(err.message);
     })
   }
+  
 }
