@@ -110,8 +110,21 @@ async saveTodo() {
               flag = true;
               map.on("click", function(e){
                 if (flag == true) {
+
+                // create popup contents
+                var customPopup = "Mozilla Toronto Offices<br/><img src='http://joshuafrazier.info/images/maptime.gif' alt='maptime logo gif' width='350px'/>";
+                    
+                // specify popup options 
+                var customOptions =
+                    {
+                    'maxWidth': '500',
+                    'className' : 'custom'
+                    }
+
+
+
                   new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-         
+                  
               
                 }
              });
