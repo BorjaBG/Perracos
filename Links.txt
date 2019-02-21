@@ -14,7 +14,8 @@ https://forum.ionicframework.com/t/how-to-solve-the-app-not-installed-error-on-a
 
 https://leafletjs.com/plugins.html
 
-
+android:
+ ionic cordova build android --prod
 
 Install:
     -
