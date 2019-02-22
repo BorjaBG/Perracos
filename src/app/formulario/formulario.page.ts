@@ -31,7 +31,7 @@ export class FormularioPage implements OnInit {
  
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
-    alert(this.todoService.getlatitudes());
+    //alert(this.todoService.getlatitudes());
     if (this.todoId)  {
       this.loadTodo();
     }

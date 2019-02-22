@@ -66,7 +66,7 @@ export class HomePage  implements OnInit{
               btn.state('x-mark');
               flag = true;
               map.on("click", function(e){
-                this.todoService.setMyGlobalVar(e.latlng.lng,e.latlng.lat);
+                //this.todoService.setMyGlobalVar(e.latlng.lng,e.latlng.lat);
                 /*long = e.latlng.lng;
                 lat = e.latlng.lat;*/
                 //new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
