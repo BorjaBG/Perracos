@@ -16,6 +16,8 @@ https://leafletjs.com/plugins.html
 
 https://leafletjs.com/examples/quick-start/
 
+https://github.com/domoritz/leaflet-locatecontrol
+
 android:
  ionic cordova build android --prod
   ionic cordova platform remove android

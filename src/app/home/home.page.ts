@@ -128,9 +128,6 @@ async saveTodo() {
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
 
-
- 
-
     leaflet.easyButton( '<ion-icon class="star" name="locate"></ion-icon>', function(control, map){
 
      map.locate({
@@ -147,13 +144,18 @@ async saveTodo() {
       }).on('locationerror', (err) => {
         alert(err.message);
     })*/
-    /*var lc = L.control.locate({
+
+
+  
+     var lc = L.control.locate({
       position: 'topright',
       strings: {
-          title: "Show me where I am, yo!"
-      }}).addTo(this.map);*/
-      L.control.locate().addTo(this.map);
- 
+          title: "<b>Posicion actual</b>"
+      }
+  }).addTo(this.map);
+
+      // request location update and set location
+      lc.start();
 
     this.map.locate({
       setView: true,
