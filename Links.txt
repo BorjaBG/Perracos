@@ -22,3 +22,18 @@ https://ionicframework.com/docs/api/textare
 https://www.youtube.com/watch?v=XZHG1e_prmQ
 
 https://forum.ionicframework.com/t/ionic-carousel-effect/131075
+
+https://leafletjs.com/examples/quick-start/
+
+https://github.com/domoritz/leaflet-locatecontrol
+
+android:
+ ionic cordova build android --prod
+  ionic cordova platform remove android
+ ionic cordova platform add android@6.4.0
+
+
+Suvir fotos a firebase
+https://ryctabo.wordpress.com/2018/03/05/how-to-upload-files-to-firebase-from-angular/
+Framework
+https://ionicframework.com/docs/api/textarea

@@ -1,14 +1,21 @@
+import { FormularioPage } from './../formulario/formulario.page';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Todo, TodoService } from '../services/todo.service';
-import { ActivatedRoute, Routes } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-import {Router}from '@angular/router';
+import { AlertController } from '@ionic/angular';
+
+
 import leaflet from 'leaflet';
+import * as L from 'leaflet';
+import 'leaflet.locatecontrol';
 
 declare var ol: any;
 declare var map: any;
 import 'leaflet-routing-machine';
 import 'leaflet-easybutton';
+import { getOrCreateCurrentQueries } from '@angular/core/src/render3/state';
+var flag : boolean = false;
 
 @Component({
   selector: 'app-home',
@@ -16,8 +23,12 @@ import 'leaflet-easybutton';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage  implements OnInit{
+
+
+
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
+  formularioP = FormularioPage;
 
   todo: Todo = {
     latitude: 0.0,
@@ -35,8 +46,20 @@ export class HomePage  implements OnInit{
   };
  
   todoId = null;
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController,public rutas: Router) { }
- 
+  constructor(private route: ActivatedRoute,private router:Router, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController, private alertCtrl: AlertController) { }
+ Actionformulario(){
+  if (flag == true) {
+    this.router.navigateByUrl('/formulario');
+  }
+  
+  }
+  Actionformulario2(){
+   
+      this.router.navigateByUrl('/formulario');
+    
+    
+    }
+
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
     if (this.todoId)  {
@@ -49,7 +72,6 @@ export class HomePage  implements OnInit{
       message: 'Loading Todo..'
     });
     await loading.present();
- 
     this.todoService.getTodo(this.todoId).subscribe(res => {
       loading.dismiss();
       this.todo = res;
@@ -82,16 +104,8 @@ async saveTodo() {
   }
  
   loadmap() {
-    let flag : boolean = true;
+    
     this.map = new leaflet.map("map").fitWorld( );
-
-     //this.map.marker([43.27683038906162, -2.898330688476563], { title: "My marker" }).addTo(map);
- 
-    /* var marker = leaflet.marker([43.27683038906162,-2.898330688476563])
-     .bindPopup("My marker")
-     .addTo(this.map);*/
-
-
 
     leaflet.control.scale().addTo(this.map);
 
@@ -108,27 +122,6 @@ async saveTodo() {
               btn.button.style.backgroundColor = 'blue';
               btn.state('x-mark');
               flag = true;
-              map.on("click", function(e){
-                if (flag == true) {
-
-                // create popup contents
-                var customPopup = "Mozilla Toronto Offices<br/><img src='http://joshuafrazier.info/images/maptime.gif' alt='maptime logo gif' width='350px'/>";
-                    
-                // specify popup options 
-                var customOptions =
-                    {
-                    'maxWidth': '500',
-                    'className' : 'custom'
-                    }
-
-
-
-                  new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-                  
-              
-                }
-             });
-         
           }
       }, {
           icon: '<ion-icon class="star" name="flag"></ion-icon>',
@@ -144,15 +137,11 @@ async saveTodo() {
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
 
-
- 
-
-    leaflet.easyButton( '<ion-icon class="star" name="locate"></ion-icon>', function(control, map){
-
-     map.locate({
-      setView: true,
-      maxZoom: 50
-    }).on('locationfound', (e) => {
+   
+    L.easyButton('<ion-icon (click)="Actionformulario2()"  class="star" name="locate"></ion-icon>', function(btn, map){
+    
+    }).addTo( this.map );
+    /*.on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
         map.setView([e.latitude,e.longitude], 13);
@@ -160,24 +149,31 @@ async saveTodo() {
       })
       }).on('locationerror', (err) => {
         alert(err.message);
-    })
-    }).addTo(this.map);
+    })*/
 
+
+  
+     var lc = L.control.locate({
+      flyTo: true,
+      showPopup:false,
+      clickBehavior: {inView: 'start'}
+  }).addTo(this.map);
+
+      lc.start();
 
     this.map.locate({
       setView: true,
       maxZoom: 50
     }).on('locationfound', (e) => {
-      let markerGroup = leaflet.featureGroup();
-      //alert(e.latitude+' '+ e.longitude);
+     /* let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
-
       })
       markerGroup.addLayer(marker);
       marker.bindPopup("<b>Posicion actual</b>").openPopup();
-      this.map.addLayer(markerGroup);
+      this.map.addLayer(markerGroup);*/
       }).on('locationerror', (err) => {
         alert(err.message);
     })    
   }
+  
 }
