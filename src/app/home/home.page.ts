@@ -1,6 +1,5 @@
 import { FormularioPage } from './../formulario/formulario.page';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Todo, TodoService } from '../services/todo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -23,82 +22,22 @@ var flag : boolean = false;
   styleUrls: ['home.page.scss'],
 })
 export class HomePage  implements OnInit{
-
-
-
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
   formularioP = FormularioPage;
-
-  todo: Todo = {
-    latitude: 0.0,
-    longitude: 0.0,
-    obserbaciones: ' ',
-    direccion: ' ',
-    especie: '',
-    tamano: 0,
-    velocidad_estimada: 0,
-    peso_estimado: 0,
-    sustrato:'',
-
-    createdAt: new Date().getTime(),
-    
-  };
  
-  todoId = null;
-  constructor(private route: ActivatedRoute,private router:Router, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController, private alertCtrl: AlertController) { }
+  constructor(private route: ActivatedRoute,private router:Router, private nav: NavController, private loadingController: LoadingController, private alertCtrl: AlertController) { }
  Actionformulario(){
   if (flag == true) {
     this.router.navigateByUrl('/formulario');
   }
   
   }
-  Actionformulario2(){
-   
-      this.router.navigateByUrl('/formulario');
-    
-    
-    }
 
   ngOnInit() {
-    this.todoId = this.route.snapshot.params['id'];
-    if (this.todoId)  {
-      this.loadTodo();
-    }
+    
   }
 
-  async loadTodo() {
-    const loading = await this.loadingController.create({
-      message: 'Loading Todo..'
-    });
-    await loading.present();
- 
-    this.todoService.getTodo(this.todoId).subscribe(res => {
-      loading.dismiss();
-      this.todo = res;
-    });
-}
-
-async saveTodo() {
- 
-  const loading = await this.loadingController.create({
-    message: 'Saving Todo..'
-  });
-  await loading.present();
-
-  if (this.todoId) {
-    this.nav
-    this.todoService.updateTodo(this.todo, this.todoId).then(() => {
-      loading.dismiss();
-    this.nav.pop();//vuelbe a la pagina anterior
-    });
-  } else {
-    this.todoService.addTodo(this.todo).then(() => {
-      loading.dismiss();
-      this.nav.pop();//vuelbe a la pagina anterior
-    });
-  }
-}
 
   ionViewDidEnter() {
     this.loadmap();
@@ -139,9 +78,7 @@ async saveTodo() {
   toggle.addTo(this.map);
 
    
-    L.easyButton('<ion-icon (click)="Actionformulario2()"  class="star" name="locate"></ion-icon>', function(btn, map){
-    
-    }).addTo( this.map );
+
     /*.on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {

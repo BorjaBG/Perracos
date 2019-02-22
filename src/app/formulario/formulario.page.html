@@ -1,9 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>formulario</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Formulario</ion-title>
+    </ion-toolbar>
+  </ion-header>
+   
+  <ion-content padding>
+    <ion-list lines="full">
+      
+      <ion-item>
+          <p>Dirreccion:</p>
+          <hr>
+          <ion-input required type="text" placeholder="Direccion" [(ngModel)]="todo.direccion"></ion-input>
+        </ion-item>
+        <ion-item>
+            <p>Especies</p>
+            <br>
+            <ion-input required type="text" placeholder="Especie" [(ngModel)]="todo.especie"></ion-input>
+          </ion-item>
+          <ion-item>
+              <p>Tamaño</p>
+              <br>
+              <ion-input required type="text" placeholder="Tamaño" [(ngModel)]="todo.tamano"></ion-input>
+            </ion-item>
+            <ion-item>
+                <p>Velocidad estimada</p>
+                <br>
+                <ion-input required type="text" placeholder="Velocidad estimada" [(ngModel)]="todo.velocidad_estimada"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <p>Peso estimado</p>
+                  <br>
+                  <ion-input required type="text" placeholder="Peso Estimado" [(ngModel)]="todo.peso_estimado"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <p>Sustrato</p>
+                    <br>
+                    <ion-input required type="text" placeholder="Sustrato" [(ngModel)]="todo.sustrato"></ion-input>
+                  </ion-item>
+                  <ion-item>
+                      <p>Obserbaciones</p>
+                      <br>
+                      <ion-input required type="text" placeholder="Task" [(ngModel)]="todo.obserbaciones"></ion-input>
+                    </ion-item>
+                
+      
+    </ion-list>
+    <ion-button  expand="full" (click)="saveTodo() ">Save</ion-button>
+  </ion-content>
