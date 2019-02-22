@@ -13,9 +13,12 @@ https://leafletjs.com/index.html
 https://forum.ionicframework.com/t/how-to-solve-the-app-not-installed-error-on-android-devices/139401/4
 
 https://leafletjs.com/plugins.html
-
-
+Camare de Fotos
+https://ionicframework.com/docs/native/camera/
 Suvir fotos a firebase
 https://ryctabo.wordpress.com/2018/03/05/how-to-upload-files-to-firebase-from-angular/
 Framework
-https://ionicframework.com/docs/api/textarea
+https://ionicframework.com/docs/api/textare
+https://www.youtube.com/watch?v=XZHG1e_prmQ
+
+https://forum.ionicframework.com/t/ionic-carousel-effect/131075

@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Todo, TodoService } from '../services/todo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
-
+import {Router}from '@angular/router';
 import leaflet from 'leaflet';
 
 declare var ol: any;
@@ -35,7 +35,7 @@ export class HomePage  implements OnInit{
   };
  
   todoId = null;
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
+  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController,public rutas: Router) { }
  
   ngOnInit() {
     this.todoId = this.route.snapshot.params['id'];
@@ -178,6 +178,6 @@ async saveTodo() {
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
         alert(err.message);
-    })
+    })    
   }
 }
