@@ -17,6 +17,9 @@ https://leafletjs.com/plugins.html
 
 android:
  ionic cordova build android --prod
+  ionic cordova platform remove android
+ ionic cordova platform add android@6.4.0
+
 =======
 
 
