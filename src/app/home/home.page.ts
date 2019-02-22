@@ -1,3 +1,4 @@
+import { TodoService } from './../services/todo.service';
 import { FormularioPage } from './../formulario/formulario.page';
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +16,8 @@ import 'leaflet-routing-machine';
 import 'leaflet-easybutton';
 import { getOrCreateCurrentQueries } from '@angular/core/src/render3/state';
 var flag : boolean = false;
-
+var long : number;
+var lat : number;
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -27,12 +29,13 @@ export class HomePage  implements OnInit{
   formularioP = FormularioPage;
  
   constructor(private route: ActivatedRoute,private router:Router, private nav: NavController, private loadingController: LoadingController, private alertCtrl: AlertController) { }
- Actionformulario(){
+ Actionformulario(e){
   if (flag == true) {
+
     this.router.navigateByUrl('/formulario');
+
   }
-  
-  }
+}
 
   ngOnInit() {
     
@@ -62,6 +65,15 @@ export class HomePage  implements OnInit{
               btn.button.style.backgroundColor = 'blue';
               btn.state('x-mark');
               flag = true;
+              map.on("click", function(e){
+                this.todoService.setMyGlobalVar(e.latlng.lng,e.latlng.lat);
+                /*long = e.latlng.lng;
+                lat = e.latlng.lat;*/
+                //new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+                //new leaflet.marker([e.latlng.lat, e.latlng.lng]).addTo(map).on('click', () => {
+    
+               // })
+              })
           }
       }, {
           icon: '<ion-icon class="star" name="flag"></ion-icon>',

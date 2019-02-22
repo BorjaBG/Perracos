@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ActionSequence } from 'protractor';
 
+
+var longitudes: number;
+var latitudes: number;
+
 export interface Todo{
 
   latitude: number,
@@ -61,7 +65,14 @@ export class TodoService {
     return this.todosCollection.doc(id).delete();
   }
 
-
-
-
+  setMyGlobalVar(lo,la) {
+    longitudes = lo;
+    latitudes = la;
+  }
+ getlatitudes() {
+    return latitudes;
+  }
+  getlongitudes() {
+    return longitudes;
+  }
 }
