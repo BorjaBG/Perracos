@@ -109,10 +109,8 @@ async saveTodo() {
                   
                   
                   })
-              
                 }
              });
-         
           }
       }, {
           icon: '<ion-icon class="star" name="flag"></ion-icon>',
