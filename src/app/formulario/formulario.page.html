@@ -9,7 +9,15 @@
    
   <ion-content padding>
     <ion-list lines="full">
-      
+            
+      <ion-item hidden>
+        <ion-input id="s" required type="text" placeholder="Direccion" [(ngModel)]="todo.latitude"></ion-input>
+      </ion-item>
+            
+      <ion-item hidden>
+        <ion-input required type="text" placeholder="Direccion" [(ngModel)]="todo.longitude"></ion-input>
+      </ion-item>
+
       <ion-item>
           <p>Dirreccion:</p>
           <hr>

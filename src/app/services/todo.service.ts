@@ -10,8 +10,8 @@ var latitudes: number;
 
 export interface Todo{
 
-  latitude: number,
-  longitude: number,
+  latitude: number;
+  longitude: number;
   createdAt: number;
   direccion: string;
     especie: string;

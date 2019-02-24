@@ -3,11 +3,15 @@ import { Todo, TodoService } from '../services/todo.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 
+var longitudes: number;
+var latitudes: number;
+
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.page.html',
   styleUrls: ['./formulario.page.scss'],
 })
+
 export class FormularioPage implements OnInit {
 
   todo: Todo = {
@@ -30,6 +34,8 @@ export class FormularioPage implements OnInit {
   constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
  
   ngOnInit() {
+    this.todo.latitude = this.todoService.getlatitudes();
+    this.todo.longitude = this.todoService.getlongitudes();
     this.todoId = this.route.snapshot.params['id'];
     //alert(this.todoService.getlatitudes());
     if (this.todoId)  {
