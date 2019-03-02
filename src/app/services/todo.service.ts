@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { ActionSequence } from 'protractor';
 
 
+let markers = [];
 var longitudes: number;
 var latitudes: number;
 
@@ -75,4 +76,5 @@ export class TodoService {
   getlongitudes() {
     return longitudes;
   }
+
 }

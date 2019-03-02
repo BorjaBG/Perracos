@@ -11,14 +11,13 @@ import leaflet from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet.locatecontrol';
 
-declare var ol: any;
-declare var map: any;
+
+var markers = [];
 import 'leaflet-routing-machine';
 import 'leaflet-easybutton';
-import { getOrCreateCurrentQueries } from '@angular/core/src/render3/state';
 var flag : boolean = false;
-var long : number;
-var lat : number;
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -28,47 +27,40 @@ export class HomePage  implements OnInit{
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
 
-  private todos: Observable<Todo[]>;
-  todo: Todo = {
-    latitude: 0.0,
-    longitude: 0.0,
-    obserbaciones: ' ',
-    direccion: ' ',
-    especie: '',
-    tamano: 0,
-    velocidad_estimada: 0,
-    peso_estimado: 0,
-    sustrato:'',
 
-    createdAt: new Date().getTime(),
-    
-  };
+  todos: Todo[];
  
 
   formularioP = FormularioPage;
  
   constructor( private todoService: TodoService, private route: ActivatedRoute,private router:Router, private nav: NavController, private loadingController: LoadingController, private alertCtrl: AlertController) { }
 
-
-
-
   ngOnInit() {
     
   }
 
   ionViewDidEnter() {
+
+  
+  
+    this.todoService.getTodos().subscribe(res => {
+      this.todos = res
+      for (var i=0; i<res.length; i++) {
+      markers.push([res[i].longitude,res[i].latitude,"pri"]);
+      //res[i][1].latitude,[]"pri"
+      }
+      this.loadmap();
+    })
+
    
-    this.loadmap();
+    
   }
- 
  
   loadmap() {
     this.map = new leaflet.map("map").fitWorld( );
   
     this.map.on("click", (e)=> {
       if (flag == true){
-       alert(e.latlng.lng);
-       alert(e.latlng.lat);
       this.todoService.setMyGlobalVar(e.latlng.lng,e.latlng.lat);
       flag = false;
       this.map.remove();
@@ -110,21 +102,22 @@ export class HomePage  implements OnInit{
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
 
-  var markers = [
-    [ -2.905540466308594, 43.26826878896206, "Big Ben" ],
-    [ -2.914981842041016, 43.26639382527152, "London Eye" ]
- ];
+ /* var markers = [
+    [ "-2.905540466308594", "43.26826878896206", "Big Ben" ],
+    [ "-2.914981842041016", "43.26639382527152", "London Eye" ]
+ ];*/
 
- this.todos = this.todoService.getTodos();
-//alert(this.todos);
-
+ /*this.todoService.getTodos().subscribe(res => {
+  this.todos = res;
+});*/
 
 
  for (var i=0; i<markers.length; i++) {
-   
+
     var lon = markers[i][0];
     var lat = markers[i][1];
     var popupText = markers[i][2];
+
     
      var markerLocation = new L.LatLng(lat, lon);
      var marker = new L.Marker(markerLocation);
