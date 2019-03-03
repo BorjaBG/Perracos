@@ -37,3 +37,7 @@ Suvir fotos a firebase
 https://ryctabo.wordpress.com/2018/03/05/how-to-upload-files-to-firebase-from-angular/
 Framework
 https://ionicframework.com/docs/api/textarea
+
+Mapas offline:
+https://medium.com/indianic/ionic-offline-map-using-satellite-images-with-leaflet-js-6c577327d21c
+https://reviblog.net/2017/10/30/mostrar-un-mapa-offline-en-ionic-con-leaflet/
