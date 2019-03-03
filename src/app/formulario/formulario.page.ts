@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo, TodoService } from '../services/todo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 
 var longitudes: number;
@@ -31,7 +31,7 @@ export class FormularioPage implements OnInit {
  
   todoId = null;
  
-  constructor(private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
+  constructor(private router:Router, private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
  
   ngOnInit() {
     this.todo.latitude = this.todoService.getlatitudes();
@@ -61,7 +61,7 @@ export class FormularioPage implements OnInit {
       message: 'Saving Todo..'
     });
     await loading.present();
- 
+  
     if (this.todoId) {
       this.nav
       this.todoService.updateTodo(this.todo, this.todoId).then(() => {
@@ -71,7 +71,8 @@ export class FormularioPage implements OnInit {
     } else {
       this.todoService.addTodo(this.todo).then(() => {
         loading.dismiss();
-        this.nav.pop();//vuelbe a la pagina anterior
+        this.router.navigateByUrl('/home');
+        //this.nav.pop();//vuelbe a la pagina anterior
       });
     }
   }
