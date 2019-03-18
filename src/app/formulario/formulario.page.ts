@@ -45,7 +45,7 @@ export class FormularioPage implements OnInit {
  
   async loadTodo() {
     const loading = await this.loadingController.create({
-      message: 'Loading Todo..'
+      message: 'Cargando..'
     });
     await loading.present();
  
@@ -58,7 +58,7 @@ export class FormularioPage implements OnInit {
   async saveTodo() {
  
     const loading = await this.loadingController.create({
-      message: 'Saving Todo..'
+      message: 'Guardando..'
     });
     await loading.present();
   

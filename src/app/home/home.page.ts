@@ -23,6 +23,8 @@ var volver : boolean = false;
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
+
 export class HomePage  implements OnInit{
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
@@ -44,7 +46,9 @@ export class HomePage  implements OnInit{
   
   console.log(volver);
   if(volver == true){
-    location.reload();
+    this.loadpuntos();
+    //presentLoading();
+  //  location.reload();
   }
     this.todoService.getTodos().subscribe(res => {
       this.todos = res
@@ -104,16 +108,6 @@ export class HomePage  implements OnInit{
 
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
-  
- /* var markers = [
-    [ "-2.905540466308594", "43.26826878896206", "Big Ben" ],
-    [ "-2.914981842041016", "43.26639382527152", "London Eye" ]
- ];*/
-
- /*this.todoService.getTodos().subscribe(res => {
-  this.todos = res;
-});*/
-
 
  for (var i=0; i<markers.length; i++) {
 
@@ -130,19 +124,6 @@ export class HomePage  implements OnInit{
  
  }
 
-
-    /*.on('locationfound', (e) => {
-      let markerGroup = leaflet.featureGroup();
-      let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
-        map.setView([e.latitude,e.longitude], 13);
-      
-      })
-      }).on('locationerror', (err) => {
-        alert(err.message);
-    })*/
-
-
-   
      var lc = L.control.locate({
       flyTo: true,
       showPopup:false,
@@ -165,7 +146,17 @@ export class HomePage  implements OnInit{
         alert(err.message);
     })    
   }
+  async loadpuntos() {
+    const loading = await this.loadingController.create({
+      message: 'Refrescando puntos..'
+    });
+    await loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+      location.reload();
+    }, 700);
+   
   }
-
-
+  }
 
