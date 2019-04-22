@@ -24,7 +24,6 @@ var volver : boolean = false;
   styleUrls: ['home.page.scss'],
 })
 
-
 export class HomePage  implements OnInit{
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
@@ -38,7 +37,6 @@ export class HomePage  implements OnInit{
   constructor( private todoService: TodoService, private route: ActivatedRoute,private router:Router, private nav: NavController, private loadingController: LoadingController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    
   }
 
   ionViewDidEnter() {
@@ -47,22 +45,23 @@ export class HomePage  implements OnInit{
   console.log(volver);
   if(volver == true){
     this.loadpuntos();
-    //presentLoading();
-  //  location.reload();
   }
     this.todoService.getTodos().subscribe(res => {
       this.todos = res
       for (var i=0; i<res.length; i++) {
-      markers.push([res[i].longitude,res[i].latitude,"pri"]);
-
+      markers.push([res[i].longitude,res[i].latitude,
+       "<a href='/formulario' onclick='localStorage.setItem("+ 1 +", "+ res[i].longitude +");localStorage.setItem("+ 2 +", "+ res[i].latitude +");' class='button'>Formulario</a>"]);
       }
       this.loadmap();
     })
   }
- 
+
+
   loadmap() {
 
     this.map = new leaflet.map("map").fitWorld( );
+
+   
 
     this.map.on("click", (e)=> {
       if (flag == true){
@@ -158,5 +157,10 @@ export class HomePage  implements OnInit{
     }, 700);
    
   }
+
+
   }
 
+  function onClick(e) {
+    alert(this.getLatLng());
+}
