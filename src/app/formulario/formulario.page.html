@@ -1,7 +1,9 @@
 <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="/home"></ion-back-button>
+        <button id="back"   onclick="window.location.href='/home'">
+          <i class="material-icons" style="font-size:35px;color:white">arrow_back</i>
+        </button>
       </ion-buttons>
       <ion-title>Formulario</ion-title>
     </ion-toolbar>
@@ -11,11 +13,11 @@
     <ion-list lines="full">
             
       <ion-item hidden>
-        <ion-input id="s" required type="text" placeholder="Direccion" [(ngModel)]="todo.latitude"></ion-input>
+        <ion-input id="s" required type="text"  [(ngModel)]="todo.latitude"></ion-input>
       </ion-item>
             
       <ion-item hidden>
-        <ion-input required type="text" placeholder="Direccion" [(ngModel)]="todo.longitude"></ion-input>
+        <ion-input required type="text"  [(ngModel)]="todo.longitude"></ion-input>
       </ion-item>
 
       <ion-item>
@@ -24,37 +26,37 @@
           <ion-input required type="text" placeholder="Direccion" [(ngModel)]="todo.direccion"></ion-input>
         </ion-item>
         <ion-item>
-            <p>Especies</p>
+            <p>Especies:</p>
             <br>
             <ion-input required type="text" placeholder="Especie" [(ngModel)]="todo.especie"></ion-input>
           </ion-item>
           <ion-item>
-              <p>Tamaño</p>
+              <p>Tamaño:</p>
               <br>
               <ion-input required type="text" placeholder="Tamaño" [(ngModel)]="todo.tamano"></ion-input>
             </ion-item>
             <ion-item>
-                <p>Velocidad estimada</p>
+                <p>Velocidad estimada:</p>
                 <br>
                 <ion-input required type="text" placeholder="Velocidad estimada" [(ngModel)]="todo.velocidad_estimada"></ion-input>
               </ion-item>
               <ion-item>
-                  <p>Peso estimado</p>
+                  <p>Peso estimado:</p>
                   <br>
                   <ion-input required type="text" placeholder="Peso Estimado" [(ngModel)]="todo.peso_estimado"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <p>Sustrato</p>
+                    <p>Sustrato:</p>
                     <br>
                     <ion-input required type="text" placeholder="Sustrato" [(ngModel)]="todo.sustrato"></ion-input>
                   </ion-item>
                   <ion-item>
-                      <p>Obserbaciones</p>
+                      <p>Obserbaciones:</p>
                       <br>
-                      <ion-input required type="text" placeholder="Task" [(ngModel)]="todo.obserbaciones"></ion-input>
+                      <ion-input required type="text" placeholder="Obserbaciones" [(ngModel)]="todo.obserbaciones"></ion-input>
                     </ion-item>
                 
       
     </ion-list>
-    <ion-button  expand="full" (click)="saveTodo() ">Save</ion-button>
+    <ion-button  expand="full" (click)="saveTodo() ">Guardar</ion-button>
   </ion-content>

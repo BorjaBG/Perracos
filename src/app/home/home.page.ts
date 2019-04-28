@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Todo, TodoService } from '../services/todo.service';
-import { Observable } from 'rxjs';
+
 
 import leaflet from 'leaflet';
 import * as L from 'leaflet';
@@ -16,13 +16,14 @@ var markers = [];
 import 'leaflet-routing-machine';
 import 'leaflet-easybutton';
 var flag : boolean = false;
-
+var volver : boolean = false;
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage  implements OnInit{
   @ViewChild('map') mapContainer: ElementRef;
   map: any;
@@ -36,39 +37,43 @@ export class HomePage  implements OnInit{
   constructor( private todoService: TodoService, private route: ActivatedRoute,private router:Router, private nav: NavController, private loadingController: LoadingController, private alertCtrl: AlertController) { }
 
   ngOnInit() {
-    
   }
 
   ionViewDidEnter() {
 
   
-  
+  console.log(volver);
+  if(volver == true){
+    this.loadpuntos();
+  }
     this.todoService.getTodos().subscribe(res => {
       this.todos = res
       for (var i=0; i<res.length; i++) {
-      markers.push([res[i].longitude,res[i].latitude,"pri"]);
-      //res[i][1].latitude,[]"pri"
+      markers.push([res[i].longitude,res[i].latitude,
+       "<a href='/formulario' onclick='localStorage.setItem("+ 1 +", "+ res[i].longitude +");localStorage.setItem("+ 2 +", "+ res[i].latitude +");' class='button'>Formulario</a>"]);
       }
       this.loadmap();
     })
+  }
+
+
+  loadmap() {
+
+    this.map = new leaflet.map("map").fitWorld( );
 
    
-    
-  }
- 
-  loadmap() {
-    this.map = new leaflet.map("map").fitWorld( );
-  
+
     this.map.on("click", (e)=> {
       if (flag == true){
       this.todoService.setMyGlobalVar(e.latlng.lng,e.latlng.lat);
       flag = false;
-      this.map.remove();
+      volver = true;
+      this.map.off();
+      /*toggle.button.style.backgroundColor = 'white';
+      toggle.state('check-mark');*/
+      //this.map.remove();
       this.router.navigateByUrl('/formulario');
-      //new leaflet.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
-      //new leaflet.marker([e.latlng.lat, e.latlng.lng]).addTo(map).on('click', () => {
 
-     // })
       }
     });
 
@@ -79,9 +84,10 @@ export class HomePage  implements OnInit{
       maxZoom: 18
     }).addTo(this.map);
 
+  
     var toggle = leaflet.easyButton({
       states: [{
-          icon: '<ion-icon class="star" name="flag"></ion-icon>',
+          icon: '<ion-icon class="star" name="flag" id="fla"></ion-icon>',
           stateName: 'check-mark',
           onClick: function(btn,map) {
               btn.button.style.backgroundColor = 'blue';
@@ -89,7 +95,7 @@ export class HomePage  implements OnInit{
               flag = true;
           }
       }, {
-          icon: '<ion-icon class="star" name="flag"></ion-icon>',
+          icon: '<ion-icon class="star" name="flag" id="fla"></ion-icon>',
           stateName: 'x-mark',
           onClick: function(btn,map) {
               flag = false;
@@ -101,16 +107,6 @@ export class HomePage  implements OnInit{
 
   toggle.button.style.transitionDuration = '.3s';
   toggle.addTo(this.map);
-
- /* var markers = [
-    [ "-2.905540466308594", "43.26826878896206", "Big Ben" ],
-    [ "-2.914981842041016", "43.26639382527152", "London Eye" ]
- ];*/
-
- /*this.todoService.getTodos().subscribe(res => {
-  this.todos = res;
-});*/
-
 
  for (var i=0; i<markers.length; i++) {
 
@@ -127,20 +123,6 @@ export class HomePage  implements OnInit{
  
  }
 
-
-
-    /*.on('locationfound', (e) => {
-      let markerGroup = leaflet.featureGroup();
-      let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
-        map.setView([e.latitude,e.longitude], 13);
-      
-      })
-      }).on('locationerror', (err) => {
-        alert(err.message);
-    })*/
-
-
-  
      var lc = L.control.locate({
       flyTo: true,
       showPopup:false,
@@ -148,7 +130,7 @@ export class HomePage  implements OnInit{
   }).addTo(this.map);
 
       lc.start();
-
+ 
     this.map.locate({
       setView: true,
       maxZoom: 50
@@ -163,5 +145,22 @@ export class HomePage  implements OnInit{
         alert(err.message);
     })    
   }
-  
+  async loadpuntos() {
+    const loading = await this.loadingController.create({
+      message: 'Refrescando puntos..'
+    });
+    await loading.present();
+
+    setTimeout(() => {
+      loading.dismiss();
+      location.reload();
+    }, 700);
+   
+  }
+
+
+  }
+
+  function onClick(e) {
+    alert(this.getLatLng());
 }
