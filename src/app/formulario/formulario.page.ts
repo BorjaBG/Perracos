@@ -18,16 +18,33 @@ export class FormularioPage implements OnInit {
   todo: Todo = {
     latitude: 0.0,
     longitude: 0.0,
-    obserbaciones: ' ',
-    direccion: ' ',
+    Tipo: 0,
+
+    //Huellas
+    direccion : '',
     especie: '',
     tamano: 0,
-    velocidad_estimada:0,
+    velocidad_estimada: 0,
     peso_estimado: 0,
-    sustrato:'',
-
+    sustrato : '',
+    obserbaciones: '',
     createdAt: new Date().getTime(),
-    
+
+    //Heces
+    Medidas: 0,
+    //Especie: ''
+    tiempo_estimado: '',
+    //Observaciones 
+
+    //Arañazos
+    //Especie
+    //Medidas 
+    Superficie: '',
+    // Observaciones
+
+    //Otros
+    General: '',
+
   };
   todos: Todo[];
   todoId = null;
@@ -35,7 +52,9 @@ export class FormularioPage implements OnInit {
   constructor(private router:Router, private route: ActivatedRoute, private nav: NavController, private todoService: TodoService, private loadingController: LoadingController) { }
  
   ngOnInit() {
-
+    
+    this.todo.Tipo = 0;
+    presentAlert();
       longitudes = parseFloat(localStorage.getItem("1"));
       latitudes  = parseFloat(localStorage.getItem("2"));
       localStorage.clear();

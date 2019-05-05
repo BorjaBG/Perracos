@@ -13,15 +13,31 @@ export interface Todo{
 
   latitude: number;
   longitude: number;
+  Tipo: number;
+//Huellas
+  direccion : string;
+  especie: string;
+  tamano: number;
+  velocidad_estimada: number;
+  peso_estimado: number;
+  sustrato : string;
+  obserbaciones: string;
   createdAt: number;
-  direccion: string;
-    especie: string;
-    tamano: number;
-    velocidad_estimada: number;
-    peso_estimado: number;
-    sustrato:string;
-    obserbaciones: string;
 
+//Heces
+  Medidas: number;
+  //Especie
+  tiempo_estimado: string;
+  //Observaciones 
+
+//Arañazos
+  //Especie
+  //Medidas 
+  Superficie: string;
+  // Observaciones
+
+//Otros
+  General: string;
 }
 
 @Injectable({
